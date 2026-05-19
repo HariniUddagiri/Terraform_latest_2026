@@ -2,6 +2,8 @@ resource "aws_security_group" "example" {
   name        = "example-security-group"
   description = "Example security group"
 
+}
+
   ingress {
     from_port   = 22
     to_port     = 22
