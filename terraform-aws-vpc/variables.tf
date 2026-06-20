@@ -73,3 +73,11 @@ variable "database_route_table_tags" {
 variable "nat_tags"{
     default={}
 }
+
+variable "is_peering_required" {
+    default=false
+}
+
+variable "peering_tags"{
+    default={}
+}
