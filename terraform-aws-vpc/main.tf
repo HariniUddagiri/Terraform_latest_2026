@@ -169,3 +169,14 @@ resource "aws_route_table_association" "database"{
     route_table_id=aws_route_table.database.id
     subnet_id=aws_subnet.database[count.index].id
 }
+
+resource "aws_db_subnet_group" "expense"{ #telling terraform in which subnets, DB instances shud be deployed WHEN RDS CREATS DB instance 
+    name="${var.project}-{var.environment}"
+    subnet_ids=aws_subnet.database[*].id
+    tags=merge(
+        var.common_tags,{
+            Name="${var.project}-{var.environment}"
+        }
+        
+    )
+}
