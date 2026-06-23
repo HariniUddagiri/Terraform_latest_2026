@@ -3,21 +3,21 @@ module "alb" {
   internal=true #telling alb shud be internal i.ee private that will be used for private/ db subnets
 
   name    = "${var.project}-${var.environment}-app-alb"
-  vpc_id  = data.aws_ssm_parameter.vpcid
+  vpc_id  = data.aws_ssm_parameter.vpcid.value
   create_security_group = false #we don't need from open source module, we are creating security grp as per our usage
-  subnets = split(",",data.aws_ssm_parameter.private_subnet_ids.id.vaue)
+  subnets = split(",",data.aws_ssm_parameter.private_subnet_ids.value)
   security_groups=[data.aws_ssm_parameter.sg_id-app_alb.value]
   enable_deletion_protection = false
   tags = merge(
     var.common_tags,
     {
-        Name = "${var.project_name}-${var.environment}-app-alb"
+        Name = "${var.project}-${var.environment}-app-alb"
     }
   )
 }
 
 resource "aws_alb_listener" "http"{
-    load_balance_arn=module.alb.arn
+    load_balancer_arn=module.alb.arn
     protocol="HTTP"
     port=80
 
