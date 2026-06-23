@@ -26,4 +26,10 @@ resource "aws_ssm_parameter" "sg_id_bastian"{
 
 }
 
+resource "aws_ssm_parameter" "sg_id-app_alb"{
+    name="/${var.project}/${var.environment}/app_alb_sg_id"
+    type="String"
+    value=module.app_alb_sg.sg_id
+
+}
 

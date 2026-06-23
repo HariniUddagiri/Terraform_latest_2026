@@ -42,3 +42,15 @@ module "bastian_sg"{
     common_tags=var.common_tags
 
 }
+
+module "app_alb_sg"{
+    #source="../terraform-aws-sg"
+    source="git::https://github.com/HariniUddagiri/Terraform_latest_2026.git//terraform-aws-sg?ref=main"
+    vpc_id=local.vpcid_final
+    sg_name="app_alb_sg"
+    sg_description="security group for app load balancer of backend expense-dev"
+    project=var.project
+    environment=var.environment
+    common_tags=var.common_tags
+
+}
