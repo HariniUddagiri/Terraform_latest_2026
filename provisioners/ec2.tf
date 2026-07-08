@@ -18,7 +18,7 @@ resource "aws_instance" "this"{
     }
 
     provisioner "remote-exec"{
-        inline = [
+        inline = [ #inline is used when you want to execute one or more shell commands directly within your Terraform configuration.
       "sudo dnf install nginx -y",
       "sudo systemctl start nginx",
     ]
